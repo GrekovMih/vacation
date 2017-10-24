@@ -40,7 +40,7 @@
 
     if ($row['password'] == $password) {
 
-        echo "<h1> Количество дней отпуска за каждый год </h1>";
+        echo "<h1> Количество дней отпуска за каждый год: </h1>";
         $YEAR = 0;
         $month = 0;
 
@@ -75,7 +75,7 @@
             if ($fmonth == $lmonth) {
 
                 $interval = date_diff($lastDay, $firstDay);
-                $monthday[$YEAR][$fmonth] += $interval->days + 1;                 //мб путаница что включается, что нет
+                $monthday[$YEAR][$fmonth] += $interval->days;                 //мб путаница что включается, что нет
 
 
             } elseif ($fmonth < $lmonth) { // есть же ограничения на максимальный срок отпуска? не может он быть в 3х месяцах
@@ -85,7 +85,7 @@
                 $lastDayofMonth = date_create($lastDayofMonth);
 
                 $interval = date_diff($lastDayofMonth, $firstDay);
-                $monthday[$YEAR][$fmonth] += $interval->days + 1;
+                $monthday[$YEAR][$fmonth] += $interval->days;
 
                 if (empty ($monthday[$lastDay->format('Y')][$lmonth])) $monthday[$lastDay->format('Y')][$lmonth] = 0;
 
@@ -99,17 +99,17 @@
         foreach ($monthday as $key => $value) {
 
             $sum = array_sum($monthday[$key]);
-            echo "За $key год в сумме отдыхали: $sum (дней) <br />";
+            echo "За $key год в сумме отдыхали (или будут отдыхать): $sum (дней) <br />";
 
             $max = max($monthday[$key]);
             $maxMonth = array_keys($monthday[$key], $max)[0];
 
-            echo "Больше всего отдыхали в $maxMonth месяце    $max (дней) <br> ";
+            echo "Больше всего отдыхали (или будут отдыхать) в $maxMonth месяце    $max (дней) <br> ";
 
             $min = min($monthday[$key]);
             $minMonth = array_keys($monthday[$key], $min)[0];
 
-            echo "Меньше всего отдыхали в $minMonth месяце    $min (дней) <br> ";
+            echo "Меньше всего отдыхали (или будут отдыхать) в $minMonth месяце    $min (дней) <br> ";
 
         }
 

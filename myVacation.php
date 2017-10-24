@@ -1,8 +1,9 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Статистика</title>
+    <title>Отпуск</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -17,7 +18,7 @@
 
 
     <?php
-    session_start();
+
     require_once 'bd.php';
 
     $login = $_POST['login'];
@@ -83,7 +84,7 @@
                 $lastDay = date_create($lastDay);
                 $firstDay = date_create($firstDay);
                 $interval = date_diff($lastDay, $firstDay);
-                $holidayBusted += $interval->days + 1;
+                $holidayBusted += $interval->days;
              }
 
 
@@ -99,7 +100,8 @@
 
 
         if ($holidayFuture > 0) {
-            echo " <br> Вы можете отдыхать $holidayFuture    (дней)  <br> ";
+            echo " <br> У вас отгулянных  $holidayFuture    (дней)  <br> "; // учитываются дни, которые уже отгуляны в отпуске.
+            // Можно сделать, чтобы учитывались  дни и в заявках, но будет ли это корректно?
 
 
         ?>
@@ -111,18 +113,18 @@
 
             <div id="newVacatoin">
 
-                <h3>Заявление на отспуск</h3>
+                <h3>Заявление на отпуск</h3>
 
                 <form role="form" id="contactForm" data-toggle="validator" class="shake">
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="newFirstDay" class="h4">Первый день отдыха</label>
+                            <label for="newFirstDay" class="h4">Первый день отдыха</label> <br>
                             <input type="date" id="newFirstDay" name="newFirstDay"/>
 
                         </div>
 
                         <div class="form-group col-sm-6">
-                            <label for="newLastDay" class="h4">Последний день отдыха</label>
+                            <label for="newLastDay" class="h4">Последний день отдыха</label> <br>
                             <input type="date" id="newLastDay" name="newLastDay"/>
 
 
@@ -149,9 +151,7 @@
             $("#form-submit-cancel").bind("click", function (event) {
 
                 var selectedCheckBoxes = document.querySelectorAll('input.checkboxcancel:checked'),
-                    cancelVacation = Array.from(selectedCheckBoxes).map(cb = > cb.value
-                )
-                ;
+                    cancelVacation = Array.from(selectedCheckBoxes).map(cb => cb.value);
 
 
                 $.ajax({
@@ -211,7 +211,7 @@
 
 
                     else
-                        alert("Многовато будет!");
+                        alert("У вас нет такого количества отпускных дней!");
 
                 }
 

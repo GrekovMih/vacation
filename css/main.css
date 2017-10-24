@@ -4,18 +4,20 @@ html {
 }
 
 body {
-    margin: 0; /* Убираем отступы */
-    height: 100%; /* Высота страницы */
-    background: url(../background.jpg); /* Параметры фона */
-    background-size: cover; /* Фон занимает всю доступную площадь */
+    margin: 0;
+    height: 100%;
     font-size: 22pt;
     line-height: 2;
     text-align:  center;
     display: flex;
     justify-content: center;
+    background: url(../background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 
 }
-
 
 
 
@@ -23,14 +25,7 @@ body {
     padding: 2%;
     opacity: 0.8;
     background: white;
-    /*   height: 70%;
-       position: absolute;
-       top: 0;
-       right: 0;
-       bottom: 0;
-       left: 0; */
     margin: auto;
-    /*  padding: auto;*/
     overflow: auto;
 
 }
@@ -56,6 +51,8 @@ body {
 .green:active {
     background: deepskyblue;
 }
+
+
 
 input{
     width: auto;
