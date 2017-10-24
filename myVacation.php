@@ -157,8 +157,7 @@
                 $.ajax({
                     url: 'delete.php',
                     type: 'post',
-                    data: "cancelVacation=" + cancelVacation //+ "&newLastDay=" + newLastDay //+ "&user_id=" + user_id
-                    ,
+                    data: "cancelVacation=" + cancelVacation,
                     cache: false,
                     success: function (data) {
                         console.log(data);
@@ -193,8 +192,7 @@
                         $.ajax({
                             url: 'requestNewVacation.php',
                             type: 'post',
-                            data: "newFirstDay=" + newFirstDay + "&newLastDay=" + newLastDay //+ "&user_id=" + user_id
-                            ,
+                            data: "newFirstDay=" + newFirstDay + "&newLastDay=" + newLastDay,
                             cache: false,
                             success: function (data) {
                                 console.log(data);
