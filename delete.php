@@ -9,9 +9,10 @@ if ($_SESSION['id']) {
     $idvacation = $_POST["cancelVacation"];
     $link = mysqli_connect($host, $user, $password, $database) or die("Ошибка " . mysqli_error($link));
     mysqli_set_charset($link, "utf8");
+
     $query2 = "
-    DELETE FROM vacation
-    WHERE idvacation = '$idvacation'
+      DELETE FROM vacation
+      WHERE idvacation = '$idvacation'
     ";
 
     $result2 = MYSQLI_QUERY($link, $query2);

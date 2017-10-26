@@ -91,8 +91,8 @@
         } while ($row = mysqli_fetch_array($result));
 
 
-        echo "</div> <h5> Для отмены заявки на отпуск нажимите галочку возле, а затем кнопку 'Отозвать заявку на отпуск' </h5>
-        <input type='button' id='form-submit-cancel' class='btn btn-success btn-lg' value='Отозвать заявления на отпуск'> <br>";
+        echo "<h5> Для отмены заявки на отпуск нажимите галочку возле, а затем кнопку 'Отозвать заявку на отпуск' </h5>
+        <input type='button' id='form-submit-cancel' class='btn btn-success btn-lg' value='Отозвать заявления на отпуск'> </div>  <br>";
 
 
         $holidayYear = 28 + 28 * (date("Y") - 2017);
@@ -100,7 +100,7 @@
 
 
         if ($holidayFuture > 0) {
-            echo " <br> У вас отгулянных  $holidayFuture    (дней)  <br> "; // учитываются дни, которые уже отгуляны в отпуске.
+            echo " <br> У вас неотгулянных $holidayFuture    (дней)  <br> "; // учитываются дни, которые уже отгуляны в отпуске.
             // Можно сделать, чтобы учитывались  дни и в заявках, но будет ли это корректно?
 
 
@@ -181,7 +181,11 @@
                     lastData = new Date(newLastDay),
                     today = new Date;
 
-                if ((firstData < today) || (lastData < today) || (firstData > lastData)) {
+                if (
+
+                  //  (firstData < today) || (lastData < today) || убрана проверка, теперь можно взять отпуск в прошлом
+
+                    (firstData > lastData)) {
                     alert("Введены некорректные даты");
 
                 } else {
