@@ -43,7 +43,7 @@
     $row = mysqli_fetch_array($result);
 
 
-    if ($row['password'] == $password) {
+    if ( ($row['password'] == $password)  && (!empty($row['password'])) ) {
         $_SESSION['id'] = $row['iduser'];
         $userid = $row['iduser'];
 

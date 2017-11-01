@@ -38,7 +38,7 @@
     $row = mysqli_fetch_array($result);
 
 
-    if ($row['password'] == $password) {
+    if ( ($row['password'] == $password)  && (!empty($row['password'])) ) {
 
         echo "<h1> Количество дней отпуска за каждый год: </h1>";
         $YEAR = 0;
