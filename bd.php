@@ -1,12 +1,12 @@
 <?php
 
-$host = 'localhost'; // адрес сервера
-$database = 'holiday'; // имя базы данных
-$user = 'root'; // имя пользователя
-$password = ''; // пароль
+$hostBD = 'localhost'; // адрес сервера
+$databaseBD = 'holiday'; // имя базы данных
+$userBD = 'root'; // имя пользователя
+$passwordBD = ''; // пароль
 
 
-$link = mysqli_connect($host, $user, $password, $database)
+$link = mysqli_connect($hostBD, $userBD, $passwordBD, $databaseBD)
 or die("Ошибка " . mysqli_error($link));
 
 mysqli_set_charset($link, "utf8");

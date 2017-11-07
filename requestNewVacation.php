@@ -9,8 +9,6 @@ if ($_SESSION['id']) {
     $newFirstDay = $_POST["newFirstDay"];
     $newLastDay = $_POST["newLastDay"];
 
-    $link = mysqli_connect($host, $user, $password, $database) or die("Ошибка " . mysqli_error($link));
-
     mysqli_set_charset($link, "utf8");
     $query2 = "
       INSERT INTO vacation
