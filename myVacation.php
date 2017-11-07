@@ -1,4 +1,4 @@
-<?php session_start();
+<?php //session_start();
 error_reporting(0);?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +50,7 @@ error_reporting(0);?>
 
 
     if (($row['password'] == $password) && (!empty($row['password']))) {
-    $_SESSION['id'] = $row['iduser'];
+  //  $_SESSION['id'] = $row['iduser'];
     $userid = $row['iduser'];
 
     $lastDayforCancel = new DateTime('3 days');
@@ -185,7 +185,9 @@ error_reporting(0);?>
                     holidayFuture = <?php echo $holidayFuture ?>,
                     firstData = new Date(newFirstDay),
                     lastData = new Date(newLastDay),
-                    today = new Date;
+                    today = new Date,
+                    userid =  <?php echo $userid ?>
+                    ;
 
                 if (
 
@@ -202,7 +204,7 @@ error_reporting(0);?>
                         $.ajax({
                             url: 'requestNewVacation.php',
                             type: 'post',
-                            data: "newFirstDay=" + newFirstDay + "&newLastDay=" + newLastDay,
+                            data: "newFirstDay=" + newFirstDay + "&newLastDay=" + newLastDay + "&userid=" + userid,
                             cache: false,
                             success: function (data) {
                                 console.log(data);
