@@ -1,4 +1,4 @@
-<?php //session_start();
+<?php session_start();
 error_reporting(0);?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,38 +20,13 @@ error_reporting(0);?>
 
     <?php
 
-    $password = $_POST['password'];
-
-    $login = $_POST['login'];
-
-    if (  (empty ($login)) || (empty($password)) )
-    echo "Пустые поля";
-    else {
+    if (empty($_SESSION['id']))
+        echo "Ошибка авторизации";
+    else{
 
     require_once 'bd.php';
 
-    $login = stripslashes($login);
-    $login = htmlspecialchars($login);
-    $password = stripslashes($password);
-    $password = htmlspecialchars($password);
-
-    $login = trim($login);
-    $password = trim($password);
-
-
-    $sql_select = "
-      SELECT *
-      FROM   user
-      WHERE login = '$login'
-    ";
-
-    $result = mysqli_query($link, $sql_select) or die("ошибка " . mysqli_error($link));
-    $row = mysqli_fetch_array($result);
-
-
-    if (($row['password'] == $password) && (!empty($row['password']))) {
-  //  $_SESSION['id'] = $row['iduser'];
-    $userid = $row['iduser'];
+    $userid =  $_SESSION['id'];
 
     $lastDayforCancel = new DateTime('3 days');
     $lastDayforCancel = $lastDayforCancel->format('Y-m-d');
@@ -66,7 +41,7 @@ error_reporting(0);?>
         ";
     // или можно просто выводить отпуска, которые еще можно отменить DATE_SUB(CURDATE(), INTERVAL 3 DAY)
 
-    $result = mysqli_query($link, $sql_select) or die("ошибка " . mysqli_error($link));
+    $result = mysqli_query($link, $sql_select) or die("ошибка запроса" . mysqli_error($link));
     $row = mysqli_fetch_array($result);
 
     echo " Даты ваших отпусков: <br>  <div id='cancelVacation'> ";
@@ -87,6 +62,14 @@ error_reporting(0);?>
         // находясь в отпуске не берут же новый?
 
         if ($lastDay < date("Y-m-d")) {
+            $lastDay = date_create($lastDay);
+            $firstDay = date_create($firstDay);
+            $interval = date_diff($lastDay, $firstDay);
+            $holidayBusted += $interval->days;
+        }else
+
+        if ($firstDay < date("Y-m-d")) {
+            $lastDay = date("Y-m-d");
             $lastDay = date_create($lastDay);
             $firstDay = date_create($firstDay);
             $interval = date_diff($lastDay, $firstDay);
@@ -233,23 +216,6 @@ error_reporting(0);?>
 
         } else
             echo "Вы не отдохнете в этом году :(  ";
-
-
-        } else {
-
-
-            echo "Ошибка авторизации:";
-
-            if ((empty($row['password']))) {
-                echo " данного пользователя не существует";
-            } elseif ($row['password'] != $password) {
-                echo " неверный пароль";
-
-            }
-
-
-
-        }
 
 
         }

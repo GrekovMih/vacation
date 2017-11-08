@@ -9,13 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+    <script type="text/javascript">
+
+
+        function validate_form ( )
+        {
+            valid = true;
+
+            if ( (document.contact_form.login.value  == "") || (document.contact_form.password.value  == "") )
+            {
+                alert ( "Пожалуйста заполните поля!" );
+                valid = false;
+            }
+
+            return valid;
+        }
+
+
+    </script>
+
+
+
+
+
 </head>
 <body>
 
 
 <div class="main">
 
-    <form action="myVacation.php" method="post">
+    <form action="auth.php" method="post" name="contact_form" onsubmit="return validate_form ( );">
 
         Логин: <br>
         <INPUT TYPE="text" NAME="login"> <br>
