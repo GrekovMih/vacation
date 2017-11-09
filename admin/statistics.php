@@ -1,3 +1,6 @@
+<?php session_start();
+error_reporting(0);?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
 <div class="main">
 
     <?php
-
+/*
     require_once '../bd.php';
 
     $login = $_POST['login'];
@@ -39,6 +42,13 @@
 
 
     if ( ($row['password'] == $password)  && (!empty($row['password'])) ) {
+*/
+
+    if (empty($_SESSION['idadmin']))
+        echo "Ошибка авторизации";
+    else {
+
+        require_once '../bd.php';
 
         echo "<h1> Количество дней отпуска за каждый год: </h1>";
         $YEAR = 0;
@@ -58,7 +68,7 @@
         do {
             $firstDay = $row['firstDay'];
             $lastDay = $row['lastDay'];
-           // echo " <br> $firstDay -  $lastDay ";
+            // echo " <br> $firstDay -  $lastDay ";
 
             $lastDay = date_create($lastDay);
             $firstDay = date_create($firstDay);
@@ -112,12 +122,8 @@
             echo "Меньше всего отдыхали (или будут отдыхать) в $minMonth месяце    $min (дней) <br> ";
 
         }
-
-
-
-    } else {
-        echo "Ошибка авторизации";
     }
+
     ?>
 
 </div>

@@ -2,11 +2,11 @@
 
 $password = $_POST['password'];
 $login = $_POST['login'];
-$tablename = 'user';
-$nextPageName = 'myVacation.php';
-$idname = 'iduser';
+$tablename = 'admin';
+$nextPageName = 'statistics.php';
+$idname = 'idadmin';
 
-require_once 'authAll.php';
+require_once '../authAll.php';
 
 auth($login, $password, $tablename, $nextPageName, $idname);
 

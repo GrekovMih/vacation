@@ -20,13 +20,13 @@ error_reporting(0);?>
 
     <?php
 
-    if (empty($_SESSION['id']))
+    if (empty($_SESSION['iduser']))
         echo "Ошибка авторизации";
     else{
 
     require_once 'bd.php';
 
-    $userid =  $_SESSION['id'];
+    $userid =  $_SESSION['iduser'];
 
     $lastDayforCancel = new DateTime('3 days');
     $lastDayforCancel = $lastDayforCancel->format('Y-m-d');
