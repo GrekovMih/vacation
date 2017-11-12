@@ -1,5 +1,8 @@
 <?php session_start();
-error_reporting(0);?>
+if (empty($_SESSION['idadmin']))
+    header("Location: index.html");
+else {
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,36 +20,6 @@ error_reporting(0);?>
 <div class="main">
 
     <?php
-/*
-    require_once '../bd.php';
-
-    $login = $_POST['login'];
-    $password = $_POST['password']; // надо бы делать хэширование пароля и тд для безопасности, но если портал во внутренней сети, думаю можно без этого
-
-    $login = stripslashes($login);
-    $login = htmlspecialchars($login);
-    $password = stripslashes($password);
-    $password = htmlspecialchars($password);
-
-    $login = trim($login);
-    $password = trim($password);
-
-
-    $sql_select = "
-      SELECT password
-      FROM   admin
-      WHERE login = '$login'
-    ";
-    $result = mysqli_query($link, $sql_select) or die("ошибка " . mysqli_error($link));
-    $row = mysqli_fetch_array($result);
-
-
-    if ( ($row['password'] == $password)  && (!empty($row['password'])) ) {
-*/
-
-    if (empty($_SESSION['idadmin']))
-        echo "Ошибка авторизации";
-    else {
 
         require_once '../bd.php';
 

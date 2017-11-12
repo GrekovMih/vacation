@@ -1,5 +1,9 @@
 <?php session_start();
-error_reporting(0);?>
+if (empty($_SESSION['iduser']))
+header("Location: index.html");
+else{
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +24,7 @@ error_reporting(0);?>
 
     <?php
 
-    if (empty($_SESSION['iduser']))
-        echo "Ошибка авторизации";
-    else{
+
 
     require_once 'bd.php';
 

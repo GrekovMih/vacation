@@ -56,4 +56,4 @@ function auth($login, $password, $tablename, $nextPageName, $idname)
 
 }
 
-?>
+
